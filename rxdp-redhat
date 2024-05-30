@@ -1,0 +1,30 @@
+#link : https://medium.com/@priyansh.saxena20/how-to-install-xrdp-in-amazon-redhat-linux-turn-your-boring-amazon-redhat-linux-in-a-gui-d2b543894ddd
+
+#Login with root account and list all the available Environment Groups available
+yum grouplist
+
+#we need to install this “ server with GUI” Environment group
+yum group install "Server with GUI" -y
+
+#TigerVNC (Tiger Virtual Network Computing) is used for sharing graphical desktop which allows you to remotely control other computers.
+yum install tigervnc-server -y
+
+#Epel(Extra Packages for enterprise Linux) provides extra packages which also includes our xrdp server, So first we need to install epel-release.
+#Copy the link address for epel-release-latest-9
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+#install our xrdp server.
+yum install xrdp -y
+
+#Configure XRDP
+systemctl start xrdp.service
+
+#now to check on which port number our xrdp service is running use “netstat -tnlp” command
+netstat -tnlp
+
+#By default xrdp works on port 3389.Now we need to add this port number in the firewall
+firewall-cmd --permanent --add-port=3389/tcp
+firewall-cmd --reload
+
+#After setting Up Xrdp we need to set the root password of our Red hat Linux instance , use “passwd root” command and give the password.
+passwd root
