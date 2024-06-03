@@ -11,6 +11,7 @@ yum install tigervnc-server -y
 
 #Epel(Extra Packages for enterprise Linux) provides extra packages which also includes our xrdp server, So first we need to install epel-release.
 #Copy the link address for epel-release-latest-9
+yum install wget -y
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
 #install our xrdp server.
